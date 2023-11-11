@@ -1,0 +1,10 @@
+<h1>Gallery</h1>
+<button routerLink="/cam">Open Camera</button>
+<button (click)="deleteAll()">Delete all</button>
+
+<div class="container">
+  <div *ngFor="let image of images" class="image-container">
+    <img [src]="image.base64" height="200px" width="200px" />
+    <span class="image-label">{{ image.target }}</span>
+  </div>
+</div>

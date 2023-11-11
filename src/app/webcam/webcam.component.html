@@ -1,0 +1,7 @@
+<h2>Target: {{ targetPhoto }}</h2>
+<webcam
+  [trigger]="triggerObservable"
+  (imageCapture)="handleImage($event)"
+></webcam>
+<button (click)="onSnapshotClick()">Take Picture</button>
+<button routerLink="/gallery">Open Gallery</button>
