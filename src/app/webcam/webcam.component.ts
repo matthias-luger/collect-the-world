@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { PhotoStorageService } from '../photoStorage.service';
 import { TargetPhotoService } from '../target-photo.service';
 import { RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-webcam',
@@ -16,7 +17,8 @@ import { RouterLink } from '@angular/router';
 export class WebcamComponent {
   constructor(
     private photoStorageService: PhotoStorageService,
-    private targetPhotoService: TargetPhotoService
+    private targetPhotoService: TargetPhotoService,
+    private toastr: ToastrService
   ) {}
 
   private trigger: Subject<void> = new Subject<void>();
@@ -36,5 +38,6 @@ export class WebcamComponent {
       target: this.targetPhoto,
     });
     this.targetPhoto = this.targetPhotoService.getNextTargetImage();
+    this.toastr.success('Image taken');
   }
 }
