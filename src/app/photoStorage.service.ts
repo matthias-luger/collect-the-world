@@ -18,7 +18,7 @@ export class PhotoStorageService {
       console.error('Database error: ', error);
     };
 
-    request.onupgradeneeded = (event) => {
+    request.onupgradeneeded = event => {
       var db = (event as any).target.result as IDBDatabase;
 
       // Create an object store with auto-incrementing key
@@ -29,7 +29,7 @@ export class PhotoStorageService {
     };
 
     // This event is fired once the database is opened successfully
-    request.onsuccess = (event) => {
+    request.onsuccess = event => {
       var db = (event as any).target.result as IDBDatabase;
 
       // Start a new transaction
@@ -64,7 +64,7 @@ export class PhotoStorageService {
         reject(error);
       };
 
-      request.onsuccess = (event) => {
+      request.onsuccess = event => {
         var db = (event as any).target.result as IDBDatabase;
         var transaction = db.transaction([this.storeName], 'readonly');
         var objectStore = transaction.objectStore(this.storeName);
@@ -74,7 +74,7 @@ export class PhotoStorageService {
         getAllRequest.onsuccess = function (event) {
           var results = (event as any).target.result as any[];
 
-          let photos = results.map((entry) => JSON.parse(entry.data));
+          let photos = results.map(entry => JSON.parse(entry.data));
 
           console.log(photos);
 
@@ -97,7 +97,7 @@ export class PhotoStorageService {
     return new Promise((resolve, reject) => {
       var request = indexedDB.open(this.databaseName, 1);
 
-      request.onsuccess = (event) => {
+      request.onsuccess = event => {
         var db = (event as any).target.result as IDBDatabase;
         var transaction = db.transaction([this.storeName], 'readwrite');
         var objectStore = transaction.objectStore(this.storeName);
